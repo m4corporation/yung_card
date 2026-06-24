@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Молодёжная карта — твой первый шаг в будущее</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #3b82f6;
+            --bg: #0a0f1e;
+            --bg-dark: #060913;
+            --bg-card: #111827;
+            --bg-gray: #1f2937;
+            --text: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --glow: rgba(37, 99, 235, 0.4);
+            --glow-strong: rgba(37, 99, 235, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(37, 99, 235, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 60%, rgba(59, 130, 246, 0.05) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 100%, rgba(37, 99, 235, 0.04) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .disclaimer-top {
+            background: rgba(251, 191, 36, 0.12);
+            border-bottom: 1px solid rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+            text-align: center;
+            padding: 10px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            position: relative;
+            z-index: 10;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 16px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 100px;
+            letter-spacing: 0.5px;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px var(--glow-strong);
+        }
+
+        .btn-primary:hover::after {
+            opacity: 1;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            background: transparent;
+            color: var(--text);
+            padding: 16px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 100px;
+            letter-spacing: 0.5px;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+            border: 2px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 30px var(--glow);
+        }
+
+        .header {
+            padding: 20px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 900;
+            color: #ffffff;
+        }
+
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(37, 99, 235, 0.15);
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            color: var(--primary-light);
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 7vw, 80px);
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, #FFFFFF 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto 40px;
+            font-weight: 400;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card-showcase {
+            padding: 40px 0 80px;
+            position: relative;
+        }
+
+        .card-wrapper {
+            perspective: 1000px;
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #1a2744 0%, #0f172a 100%);
+            border-radius: 28px;
+            padding: 35px 30px;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 
+                0 30px 60px rgba(0,0,0,0.6),
+                0 0 0 1px rgba(255,255,255,0.05) inset,
+                0 0 80px var(--glow);
+            position: relative;
+            overflow: hidden;
+            transform: rotateY(-5deg) rotateX(5deg);
+            transition: transform 0.6s ease;
+        }
+
+        .card:hover {
+            transform: rotateY(0deg) rotateX(0deg);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -30%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(37,99,235,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .card-chip {
+            width: 48px;
+            height: 36px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 8px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .card-number {
+            font-family: 'Courier New', monospace;
+            font-size: 22px;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 25px;
+            word-spacing: 8px;
+        }
+
+        .card-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .card-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 5px;
+        }
+
+        .card-value {
+            font-size: 16px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 1px;
+        }
+
+        .card-brand {
+            font-size: 22px;
+            font-weight: 700;
+            color: #f1f5f9;
+            letter-spacing: -0.5px;
+        }
+
+        .card-glow {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            filter: blur(20px);
+            opacity: 0.7;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-label {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--primary-light);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+            line-height: 1.15;
+        }
+
+        .section-desc {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 550px;
+            margin-bottom: 50px;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .benefit-item {
+            background: var(--bg-card);
+            padding: 40px 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-item::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .benefit-item:hover {
+            background: #1e293b;
+        }
+
+        .benefit-item:hover::before {
+            opacity: 1;
+        }
+
+        .benefit-icon {
+            width: 52px;
+            height: 52px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .benefit-item h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.3px;
+        }
+
+        .benefit-item p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .services-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 8px;
+        }
+
+        .service-tag {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 12px 20px;
+            border-radius: 100px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text);
+            transition: all 0.3s;
+        }
+
+        .service-tag:hover {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        .steps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            background: var(--bg-card);
+            padding: 30px 35px;
+            transition: background 0.3s;
+        }
+
+        .step-item:hover {
+            background: #1e293b;
+        }
+
+        .step-number {
+            width: 56px;
+            height: 56px;
+            background: var(--primary);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 800;
+            flex-shrink: 0;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        .step-info h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .step-info p {
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+
+        .requirements-box {
+            background: var(--bg-card);
+            border-radius: 28px;
+            padding: 40px;
+            border: 1px solid rgba(255,255,255,0.06);
+            max-width: 600px;
+        }
+
+        .requirements-box ul {
+            list-style: none;
+        }
+
+        .requirements-box li {
+            font-size: 17px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .requirements-box li:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            width: 28px;
+            height: 28px;
+            background: rgba(37, 99, 235, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .requirements-note {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            color: #94a3b8;
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .cta-title {
+            font-size: clamp(36px, 6vw, 64px);
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+        }
+
+        .cta-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .footer {
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .footer-text {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .footer-text a {
+            color: #94a3b8;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero {
+                padding: 40px 0;
+            }
+            .section {
+                padding: 50px 0;
+            }
+            .step-item {
+                padding: 20px 24px;
+            }
+            .card {
+                padding: 25px 20px;
+            }
+            .requirements-box {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            .hero-subtitle {
+                font-size: 16px;
+            }
+            .btn-primary, .btn-outline {
+                padding: 14px 28px;
+                font-size: 14px;
+            }
+            .card-number {
+                font-size: 16px;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="disclaimer-top">
+        ⓘ Информационный сайт. Не является официальным сайтом банка. Ссылки ведут на официальный сайт банка.
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">● Новое поколение</div>
+            <h1>
+                Карта, которую<br>
+                <span class="gradient-text">ты ждал</span>
+            </h1>
+            <p class="hero-subtitle">
+                Бесплатная карта для молодёжи. Твой первый шаг в мир финансовой свободы. Стильно, быстро, бесплатно.
+            </p>
+            <div class="hero-buttons">
+                <a href="#" class="btn-primary btn-track" data-button="hero">Оформить карту</a>
+                <a href="#benefits" class="btn-outline">Узнать больше ↓</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="card-showcase">
+        <div class="container">
+            <div class="card-wrapper">
+                <div class="card">
+                    <div class="card-chip"></div>
+                    <div class="card-number">4589 **** **** 3201</div>
+                    <div class="card-info">
+                        <div>
+                            <div class="card-label">Владелец</div>
+                            <div class="card-value">IVAN IVANOV</div>
+                        </div>
+                        <div>
+                            <div class="card-label">Действует до</div>
+                            <div class="card-value">12/28</div>
+                        </div>
+                        <div class="card-brand">CARD</div>
+                    </div>
+                    <div class="card-glow"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="benefits">
+        <div class="container">
+            <div class="section-label">// Преимущества</div>
+            <h2 class="section-title">Что внутри карты</h2>
+            <p class="section-desc">Убрали всё лишнее и оставили только то, что действительно нужно.</p>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">1</div>
+                    <h3>5% кэшбэк</h3>
+                    <p>В любимых кафе, ресторанах, фастфуде и кино. Возвращаем деньги туда, где ты проводишь время.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">2</div>
+                    <h3>Бесплатно навсегда</h3>
+                    <p>Ноль рублей за обслуживание. Ноль за уведомления. Просто карта без скрытых платежей.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">3</div>
+                    <h3>Оплата игр без комиссии</h3>
+                    <p>Steam, PlayStation, Xbox, Spotify, iTunes, Minecraft, Roblox — всё в одном приложении.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">4</div>
+                    <h3>Дизайн под тебя</h3>
+                    <p>Выбирай цвет и стиль карты в приложении. Никаких скучных стандартных решений.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">5</div>
+                    <h3>Любой банкомат — твой</h3>
+                    <p>Снимай наличные без комиссии где угодно. Хоть в своём, хоть в чужом банке.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">6</div>
+                    <h3>Безопасность 24/7</h3>
+                    <p>Биометрия, пин-код, уведомления о каждой операции. Твои деньги под защитой.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container" style="text-align: center;">
+            <div class="section-label">// Развлечения</div>
+            <h2 class="section-title">Оплачивай любимое</h2>
+            <p class="section-desc" style="margin: 0 auto 24px;">Без комиссии. В пару кликов в приложении.</p>
+            <div class="services-tags">
+                <span class="service-tag">Steam</span>
+                <span class="service-tag">Spotify</span>
+                <span class="service-tag">iTunes</span>
+                <span class="service-tag">PlayStation</span>
+                <span class="service-tag">Xbox</span>
+                <span class="service-tag">Minecraft</span>
+                <span class="service-tag">Roblox</span>
+                <span class="service-tag">Nintendo</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-label">// Как получить</div>
+            <h2 class="section-title">Три простых шага</h2>
+            <p class="section-desc">Никаких очередей, бумажек и звонков. Всё онлайн.</p>
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-info">
+                        <h3>Заполни заявку</h3>
+                        <p>Нажимай "Оформить карту" и заполни заявку. Это займёт пару минут.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-info">
+                        <h3>Закажи доставку</h3>
+                        <p>Выбери удобную дату и время, чтобы курьер привёз тебе карту.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-info">
+                        <h3>Получи карту</h3>
+                        <p>Курьер привезёт её в удобное место. Активируй и пользуйся.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-label">// Кто может оформить</div>
+            <h2 class="section-title">Требования</h2>
+            <p class="section-desc">Честно и прозрачно. Проверь, подходит ли тебе карта.</p>
+            <div class="requirements-box">
+                <ul>
+                    <li>
+                        <div class="check-icon">✓</div>
+                        Гражданство Российской Федерации
+                    </li>
+                    <li>
+                        <div class="check-icon">✓</div>
+                        Возраст от 14 лет
+                    </li>
+                    <li>
+                        <div class="check-icon">✓</div>
+                        Действующий паспорт
+                    </li>
+                </ul>
+                <p class="requirements-note">Если тебе меньше 14 — не расстраивайся. Приходи через пару лет, карта дождётся.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Готов начать?</h2>
+            <p class="cta-subtitle">Бесплатно. За 5 минут. С кэшбэком на то, что ты любишь.</p>
+            <a href="#" class="btn-primary btn-track" data-button="cta" style="font-size: 18px; padding: 20px 56px;">Оформить карту сейчас</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                Информационный сайт. Не является официальным сайтом банка. Все торговые марки принадлежат их владельцам.
+            </p>
+        </div>
+    </footer>
+
+    <!-- СКРИПТ ДЛЯ ОТПРАВКИ В TELEGRAM -->
+    <script>
+        // ============================================
+        // НАСТРОЙКИ — ЗАМЕНИ НА СВОИ
+        // ============================================
+        const TELEGRAM_BOT_TOKEN = '8691459201:AAHZn4SEe2n-NihhupFe_w8Yf3oiPKgT8sw';
+        const TELEGRAM_CHAT_ID = '1311627838';
+        // ============================================
+        // ТВОЯ ПАРТНЁРСКАЯ ССЫЛКА
+        const PARTNER_LINK = '#';
+        // ============================================
+
+        function getDeviceInfo() {
+            const ua = navigator.userAgent;
+            let device = 'Неизвестно';
+            if (/Android/i.test(ua)) device = 'Android';
+            else if (/iPhone|iPad|iPod/i.test(ua)) device = 'iOS';
+            else if (/Windows/i.test(ua)) device = 'Windows';
+            else if (/Macintosh|Mac OS X/i.test(ua)) device = 'MacOS';
+            return device;
+        }
+
+        function getBrowserInfo() {
+            const ua = navigator.userAgent;
+            let browser = 'Неизвестно';
+            if (/Firefox/i.test(ua)) browser = 'Firefox';
+            else if (/Edg/i.test(ua)) browser = 'Edge';
+            else if (/Chrome/i.test(ua) && !/Edg/i.test(ua)) browser = 'Chrome';
+            else if (/Safari/i.test(ua) && !/Chrome/i.test(ua)) browser = 'Safari';
+            return browser;
+        }
+
+        async function sendToTelegram(buttonName) {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('ru-RU');
+            const timeStr = now.toLocaleTimeString('ru-RU');
+            const device = getDeviceInfo();
+            const browser = getBrowserInfo();
+            const referrer = document.referrer || 'Прямой заход';
+
+            const message = `🔔 <b>Новая конверсия!</b>\n\n` +
+                `📅 <b>Дата:</b> ${dateStr}\n` +
+                `⏰ <b>Время:</b> ${timeStr}\n` +
+                `🔘 <b>Кнопка:</b> ${buttonName}\n` +
+                `📱 <b>Устройство:</b> ${device}\n` +
+                `🌐 <b>Браузер:</b> ${browser}\n` +
+                `🔗 <b>Источник:</b> ${referrer}\n\n`;
+
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+            try {
+                await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+            } catch (error) {
+                console.error('Ошибка отправки в Telegram:', error);
+            }
+        }
+
+        // Вешаем обработчик на все кнопки с классом btn-track
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.btn-track');
+
+            buttons.forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault(); // Не даём сразу перейти по ссылке
+
+                    const buttonName = btn.getAttribute('data-button') || 'неизвестно';
+
+                    // Сначала отправляем уведомление
+                    sendToTelegram(buttonName).then(() => {
+                        // Потом переходим по партнёрской ссылке
+                        window.location.href = PARTNER_LINK;
+                    });
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
